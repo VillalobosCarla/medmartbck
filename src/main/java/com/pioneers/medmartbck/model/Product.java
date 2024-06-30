@@ -1,25 +1,25 @@
 package com.pioneers.medmartbck.model;
 
 import java.time.LocalDateTime;
-
+import java.util.Set;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name = "products")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long id;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductBatch> productBatches;
 
     @NotBlank
     @Size(max = 50)
@@ -41,31 +41,29 @@ public class Product {
     private String productDescription;
 
     @CreationTimestamp
-    @Column(updatable = false, name = "create_at")
+    @Column(updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @NotBlank
+    @NotNull
     private double price;
 
     public Product() {
     }
 
-    public Product(@NotBlank @Size(max = 50) String productName, @NotBlank @Size(max = 50) String genericName,
-            @NotBlank @Size(max = 50) String category, @NotBlank @Size(max = 50) String productDescription,
-            @NotBlank double price) {
-        this.productName = productName;
-        this.genericName = genericName;
-        this.category = category;
-        this.productDescription = productDescription;
-        this.price = price;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public Set<ProductBatch> getProductBatches() {
+        return productBatches;
+    }
+
+    public void setProductBatches(Set<ProductBatch> productBatches) {
+        this.productBatches = productBatches;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -115,5 +113,4 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
-
 }

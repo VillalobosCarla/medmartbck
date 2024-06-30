@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -41,13 +43,14 @@ public class User {
     public User() {
     }
 
-    // Getters and Setters
+    // Constructor
     public User(@NotBlank @Size(max = 50) String name, @NotBlank String email, @NotBlank String password) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
+    // Getters
     public Long getId() {
         return id;
     }
@@ -80,15 +83,7 @@ public class User {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
