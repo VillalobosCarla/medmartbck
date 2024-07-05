@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+// import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,19 +40,19 @@ public class UserController {
         return "A new user is added.";
     }
 
-    @PutMapping("/user/edit/{id}")
-    public User update(@PathVariable Long id, @RequestBody User newUser) {
-        return repo.findById(id)
-                .map(user -> {
-                    user.setName(newUser.getName());
-                    user.setPassword(newUser.getPassword());
-                    return repo.save(user);
-                }).orElseGet(
-                        () -> {
-                            return repo.save(newUser);
-                        });
+    // @PutMapping("/user/edit/{id}")
+    // public User update(@PathVariable Long id, @RequestBody User newUser) {
+    //     return repo.findById(id)
+    //             .map(user -> {
+    //                 user.setName(newUser.getName());
+    //                 user.setPassword(newUser.getPassword());
+    //                 return repo.save(user);
+    //             }).orElseGet(
+    //                     () -> {
+    //                         return repo.save(newUser);
+    //                     });
 
-    }
+    // }
 
     @DeleteMapping("/user/delete/{id}")
     public String delete(@PathVariable Long id){
