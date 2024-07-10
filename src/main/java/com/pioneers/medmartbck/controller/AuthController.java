@@ -53,5 +53,5 @@ public class AuthController {
             userRepository.save(user);
             return new ResponseEntity<>("USer registered Successfully", HttpStatus.OK);
         }
-
+       
 }
