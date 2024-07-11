@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pioneers.medmartbck.NotFoundException.ProductNotFoundException;
@@ -17,6 +18,7 @@ import com.pioneers.medmartbck.repository.ProductRepository;
 
 
 @RestController
+@RequestMapping("api/v1/product")
 public class ProductController {
     
     ProductRepository repo;
@@ -25,24 +27,24 @@ public class ProductController {
         this.repo = repo;
     }
 
-    @GetMapping("/products")
+    @GetMapping("/all")
     public List<Product> getProducts() {
         return repo.findAll();
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
     public Product geProduct(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(
                 () -> new ProductNotFoundException(id));
     }
 
-    @PostMapping("/product/create")
+    @PostMapping("/create")
     public String create(@RequestBody Product newProduct) {
         repo.save(newProduct);
         return "A new product is added.";
     }
 
-    @PutMapping("/product/edit/{id}")
+    @PutMapping("/edit/{id}")
     public Product update(@PathVariable Long id, @RequestBody Product newProduct) {
         return repo.findById(id)
                 .map(product -> {
@@ -57,7 +59,7 @@ public class ProductController {
                 });
     }
 
-    @DeleteMapping("/product/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         repo.deleteById(id);
         return "The product is deleted!";
