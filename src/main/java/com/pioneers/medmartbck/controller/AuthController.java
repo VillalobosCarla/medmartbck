@@ -23,9 +23,10 @@ import com.pioneers.medmartbck.repository.RoleRepository;
 import com.pioneers.medmartbck.repository.UserRepository;
 
 @RestController
-@RequestMapping("api/v1/Auth")
-public class AuthController {
 
+@RequestMapping("/api/v1/auth")
+public class AuthController {
+    
     @Autowired
     UserRepository userRepository;
 
@@ -73,4 +74,5 @@ public class AuthController {
                 return new ResponseEntity<>("Invalid username or email", HttpStatus.UNAUTHORIZED);
             }
             }
+
 }
