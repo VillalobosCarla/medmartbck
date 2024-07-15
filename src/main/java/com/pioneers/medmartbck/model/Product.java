@@ -18,8 +18,6 @@ public class Product {
     @Column(name = "product_id")
     private Long id;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductBatch> productBatches;
 
     @NotBlank
     @Size(max = 50)
@@ -58,13 +56,6 @@ public class Product {
         return id;
     }
 
-    public Set<ProductBatch> getProductBatches() {
-        return productBatches;
-    }
-
-    public void setProductBatches(Set<ProductBatch> productBatches) {
-        this.productBatches = productBatches;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

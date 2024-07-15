@@ -46,8 +46,6 @@ public class ProductBatchController {
     public ProductBatch update(@PathVariable Long id, @RequestBody ProductBatch newProductBatch) {
         return repo.findById(id)
                 .map(productBatch -> {
-                    productBatch.setProduct(newProductBatch.getProduct());
-                    productBatch.setSupplier(newProductBatch.getSupplier());
                     productBatch.setBatchNumber(newProductBatch.getBatchNumber());
                     productBatch.setExpirationDate(newProductBatch.getExpirationDate());
                     productBatch.setQuantity(newProductBatch.getQuantity());
