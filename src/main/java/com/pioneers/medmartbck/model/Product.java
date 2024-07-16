@@ -38,6 +38,11 @@ public class Product {
     @Column(name = "product_description")
     private String productDescription;
 
+    @NotBlank
+    @Size(max = 255)
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private LocalDateTime createdAt;
@@ -103,5 +108,13 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
