@@ -42,19 +42,19 @@ public class UserController {
         return "A new user is added.";
     }
 
-    @PutMapping("/edit/{id}")
-    public User update(@PathVariable Long id, @RequestBody User newUser) {
-        return repo.findById(id)
-                .map(user -> {
-                    user.setName(newUser.getName());
-                    user.setPassword(newUser.getPassword());
-                    return repo.save(user);
-                }).orElseGet(
-                        () -> {
-                            return repo.save(newUser);
-                        });
+    // @PutMapping("/edit/{id}")
+    // public User update(@PathVariable Long id, @RequestBody User newUser) {
+    //     return repo.findById(id)
+    //             .map(user -> {
+    //                 user.setName(newUser.getName());
+    //                 user.setPassword(newUser.getPassword());
+    //                 return repo.save(user);
+    //             }).orElseGet(
+    //                     () -> {
+    //                         return repo.save(newUser);
+    //                     });
 
-    }
+    // }
 
 
     @DeleteMapping("/delete/{id}")

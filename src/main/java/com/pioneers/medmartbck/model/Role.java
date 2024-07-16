@@ -21,10 +21,6 @@ public class Role {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Long getId() {
         return id;
     }

@@ -16,14 +16,8 @@ public class ProductBatch {
     @Column(name = "product_batches_id")
     private Long id;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "supplier_id")
-    private Supplier supplier;
+    @Column(name = "product_id")
+    private Long productId;
     
     @NotNull
     @Column(name = "batch_number")
@@ -51,10 +45,9 @@ public class ProductBatch {
 
     ProductBatch(){}
 
-    public ProductBatch(@NotNull Product product, Supplier supplier, @NotNull Long batchNumber,
+    public ProductBatch(@NotNull Long productId, @NotNull Long batchNumber,
             @NotNull LocalDate expirationDate, @NotNull Integer quantity, @NotNull Double supplierPrice) {
-        this.product = product;
-        this.supplier = supplier;
+        this.productId = productId;
         this.batchNumber = batchNumber;
         this.expirationDate = expirationDate;
         this.quantity = quantity;
@@ -69,20 +62,12 @@ public class ProductBatch {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public Long getBatchNumber() {
