@@ -2,8 +2,10 @@ package com.pioneers.medmartbck.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,28 +15,30 @@ public class ProductBatch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_batches_id")
-    private Long id;
+    @Column(name = "product_batch_id")
+    private Long productBatchId;
 
-    @Column(name = "product_id")
-    private Long productId;
-    
     @NotNull
-    @Column(name = "batch_number")
-    private Long batchNumber;
-    
+    @Column(name = "batch_number", unique = true)
+    private String batchNumber;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
+
     @NotNull
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
-    
+
     @NotNull
-    private Integer quantity;
+    private int quantity;
 
     @NotNull
     @Column(name = "supplier_price")
-    private Double supplierPrice;
+    private double supplierPrice;
 
-    @CreationTimestamp
+       @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
@@ -43,39 +47,27 @@ public class ProductBatch {
     private LocalDateTime updatedAt;
 
 
-    ProductBatch(){}
-
-    public ProductBatch(@NotNull Long productId, @NotNull Long batchNumber,
-            @NotNull LocalDate expirationDate, @NotNull Integer quantity, @NotNull Double supplierPrice) {
-        this.productId = productId;
-        this.batchNumber = batchNumber;
-        this.expirationDate = expirationDate;
-        this.quantity = quantity;
-        this.supplierPrice = supplierPrice;
+    public ProductBatch() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getProductBatchId() {
+        return productBatchId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public Long getBatchNumber() {
+    public String getBatchNumber() {
         return batchNumber;
     }
 
-    public void setBatchNumber(Long batchNumber) {
+    public void setBatchNumber(String batchNumber) {
         this.batchNumber = batchNumber;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public LocalDate getExpirationDate() {
@@ -86,27 +78,19 @@ public class ProductBatch {
         this.expirationDate = expirationDate;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Double getSupplierPrice() {
+    public double getSupplierPrice() {
         return supplierPrice;
     }
 
-    public void setSupplierPrice(Double supplierPrice) {
+    public void setSupplierPrice(double supplierPrice) {
         this.supplierPrice = supplierPrice;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 }
