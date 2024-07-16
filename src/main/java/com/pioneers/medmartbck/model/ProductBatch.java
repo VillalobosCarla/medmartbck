@@ -15,7 +15,7 @@ public class ProductBatch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_batch_id")
+    @Column(name = "product_batches_id")
     private Long productBatchId;
 
     @NotNull
