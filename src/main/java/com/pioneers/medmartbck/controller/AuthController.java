@@ -58,6 +58,26 @@ public class AuthController {
             userRepository.save(user);
             return new ResponseEntity<>("USer registered Successfully", HttpStatus.OK);
         }
+
+        @PostMapping("/register/user")
+        public ResponseEntity<?>registerUser(@RequestBody RegistrationRequest registrationRequest){
+            if(userRepository.existsByUsername(registrationRequest.getUsername())){
+                return new ResponseEntity<>("User is already taken,",HttpStatus.BAD_REQUEST);
+            }
+            if(userRepository.existsByEmail(registrationRequest.getEmail())){
+                return new ResponseEntity<>("User is already taken,",HttpStatus.BAD_REQUEST);
+            }
+            User user = new User(
+                registrationRequest.getUsername(),
+                registrationRequest.getEmail(),
+                passwordEncoder.encode(registrationRequest.getPassword())
+            );
+            Role role = roleRepository. findByName("ROLE_USER").get();
+            user.setRoles(Collections.singleton(role));
+
+            userRepository.save(user);
+            return new ResponseEntity<>("USer registered Successfully", HttpStatus.OK);
+        }
     
      @PostMapping("/login")
         public ResponseEntity<String>login(@RequestBody LoginRequest loginRequest){
