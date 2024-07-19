@@ -23,9 +23,8 @@ public class ProductBatch {
     private String batchNumber;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @Column(name = "product_id")
+    private Long productId;
 
     @NotNull
     @Column(name = "expiration_date")
@@ -38,7 +37,7 @@ public class ProductBatch {
     @Column(name = "supplier_price")
     private double supplierPrice;
 
-       @CreationTimestamp
+    @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
@@ -62,12 +61,12 @@ public class ProductBatch {
         this.batchNumber = batchNumber;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public LocalDate getExpirationDate() {
