@@ -46,7 +46,7 @@ public class InventoryController {
     public Inventory update(@PathVariable Long id, @RequestBody Inventory newInventory) {
         return repo.findById(id)
                 .map(inventory -> {
-                    inventory.setProductBatch(newInventory.getProductBatch());
+                    inventory.setProductBatchId(newInventory.getProductBatchId());
                     inventory.setQuantity(newInventory.getQuantity());
                     return repo.save(inventory);
                 }).orElseGet(() -> {
