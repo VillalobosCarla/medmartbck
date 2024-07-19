@@ -16,9 +16,8 @@ public class Inventory {
     private Long id;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "product_batches_id", referencedColumnName = "product_batches_id")
-    private ProductBatch productBatch;
+    @Column(name = "product_batches_id")
+    private Long productBatchId;
 
     @NotNull
     private Integer quantity;
@@ -33,8 +32,8 @@ public class Inventory {
 
     public Inventory() {}
 
-    public Inventory(@NotNull ProductBatch productBatch, @NotNull Integer quantity) {
-        this.productBatch = productBatch;
+    public Inventory(@NotNull Long productBatchId, @NotNull Integer quantity) {
+        this.productBatchId = productBatchId;
         this.quantity = quantity;
     }
 
@@ -46,12 +45,12 @@ public class Inventory {
         this.id = id;
     }
 
-    public ProductBatch getProductBatch() {
-        return productBatch;
+    public Long getProductBatchId() {
+        return productBatchId;
     }
 
-    public void setProductBatch(ProductBatch productBatch) {
-        this.productBatch = productBatch;
+    public void setProductBatchId(Long productBatchId) {
+        this.productBatchId = productBatchId;
     }
 
     public Integer getQuantity() {
