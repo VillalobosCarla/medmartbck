@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pioneers.medmartbck.repository.InventoryRepository;
 import com.pioneers.medmartbck.repository.ProductBatchRepository;
-// import com.pioneers.medmartbck.repository.SalesRepository;
+import com.pioneers.medmartbck.repository.SalesRepository;
 
 @RestController
 @RequestMapping("api/v1/dashboard")
@@ -14,12 +14,12 @@ public class DashboardController {
 
     private final InventoryRepository inventoryRepo;
     private final ProductBatchRepository productBatchRepo;
-    // private final SalesRepository salesRepo;
+    private final SalesRepository salesRepo;
 
-    public DashboardController(InventoryRepository inventoryRepo, ProductBatchRepository productBatchRepo) {
+    public DashboardController(InventoryRepository inventoryRepo, ProductBatchRepository productBatchRepo, SalesRepository salesRepo) {
         this.inventoryRepo = inventoryRepo;
         this.productBatchRepo = productBatchRepo;
-        // this.salesRepo = salesRepo;
+        this.salesRepo = salesRepo;
     }
 
     @GetMapping("/totalInventoryCount")
@@ -32,8 +32,8 @@ public class DashboardController {
         return productBatchRepo.count();
     }
 
-    // @GetMapping("/totalSalesCount")
-    // public Long getTotalSalesCount() {
-    //     return salesRepo.count();
-    // }
+    @GetMapping("/totalSalesCount")
+    public Long getTotalSalesCount() {
+        return salesRepo.count();
+    }
 }
