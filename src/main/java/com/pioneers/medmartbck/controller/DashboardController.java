@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pioneers.medmartbck.repository.InventoryRepository;
 import com.pioneers.medmartbck.repository.ProductBatchRepository;
+import com.pioneers.medmartbck.repository.ProductRepository;
 import com.pioneers.medmartbck.repository.SalesRepository;
 
 @RestController
@@ -20,11 +21,13 @@ public class DashboardController {
     private final InventoryRepository inventoryRepo;
     private final ProductBatchRepository productBatchRepo;
     private final SalesRepository salesRepo;
+    private final ProductRepository productRepo;
 
-    public DashboardController(InventoryRepository inventoryRepo, ProductBatchRepository productBatchRepo, SalesRepository salesRepo) {
+    public DashboardController(InventoryRepository inventoryRepo, ProductBatchRepository productBatchRepo, SalesRepository salesRepo, ProductRepository productRepo) {
         this.inventoryRepo = inventoryRepo;
         this.productBatchRepo = productBatchRepo;
         this.salesRepo = salesRepo;
+        this.productRepo = productRepo;
     }
 
     @GetMapping("/totalInventoryCount")
@@ -40,6 +43,11 @@ public class DashboardController {
     @GetMapping("/totalSalesCount")
     public Long getTotalSalesCount() {
         return salesRepo.count();
+    }
+
+    @GetMapping("/totalProductCount")
+    public Long getTotalProductCount() {
+        return productRepo.count();
     }
 
     @GetMapping("/salesPerDay")
