@@ -14,6 +14,13 @@ public class Sales {
     @Column(name = "sales_id")
     private Long id;
 
+    @NotNull
+    @Column(name = "sales_details_id")
+    private Long salesDetailsId;
+
+    @NotNull
+    private Integer quantity;
+
     @CreationTimestamp
     @Column(updatable = false, name = "sale_date")
     private LocalDateTime saleDate;
@@ -27,6 +34,22 @@ public class Sales {
 
     public Long getId() {
         return id;
+    }
+    
+    public Long getSalesDetailsId() {
+        return salesDetailsId;
+    }
+
+    public void setSalesDetailsId(Long salesDetailsId) {
+        this.salesDetailsId = salesDetailsId;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDateTime getSaleDate() {
