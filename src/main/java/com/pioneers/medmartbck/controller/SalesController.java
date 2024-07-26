@@ -37,9 +37,8 @@ public class SalesController {
     }
 
     @PostMapping("/create")
-    public String create(@RequestBody Sales newSale) {
-        repo.save(newSale);
-        return "A new sale is added.";
+    public Sales create(@RequestBody Sales newSale) {
+        return repo.save(newSale);
     }
 
     @PutMapping("/edit/{id}")
@@ -59,5 +58,4 @@ public class SalesController {
         repo.deleteById(id);
         return "The sale is deleted!";
     }
-
 }
