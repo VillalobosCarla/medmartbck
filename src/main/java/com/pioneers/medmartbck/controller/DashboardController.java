@@ -2,6 +2,7 @@ package com.pioneers.medmartbck.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pioneers.medmartbck.model.ProductBatch;
 import com.pioneers.medmartbck.repository.InventoryRepository;
 import com.pioneers.medmartbck.repository.ProductBatchRepository;
 import com.pioneers.medmartbck.repository.ProductRepository;
@@ -64,6 +66,13 @@ public class DashboardController {
         LocalDateTime startOfWeek = start.atStartOfDay();
         LocalDateTime endOfWeek = end.atStartOfDay();
         return salesRepo.countBySaleDateBetween(startOfWeek, endOfWeek);
+    }
+
+     @GetMapping("/productsNearExpiration")
+    public List<ProductBatch> getProductsNearExpiration() {
+        LocalDate today = LocalDate.now();
+        LocalDate thirtyDaysFromNow = today.plusDays(30);
+        return productBatchRepo.findByExpirationDateBetween(today, thirtyDaysFromNow);
     }
 
 }
