@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pioneers.medmartbck.NotFoundException.SalesDetailsNotFoundException;
@@ -36,6 +37,11 @@ public class SalesDetailsController {
                 () -> new SalesDetailsNotFoundException(id));
     }
 
+    @GetMapping("/by-sales-id")
+    public List<SalesDetails> getSalesDetailsBySalesId(@RequestParam Long salesId) {
+        return repo.findBySalesId(salesId);
+    }
+
     @PostMapping("/create")
     public String create(@RequestBody SalesDetails newSaleDetail) {
         repo.save(newSaleDetail);
@@ -61,5 +67,4 @@ public class SalesDetailsController {
         repo.deleteById(id);
         return "The sale detail is deleted!";
     }
-
 }
