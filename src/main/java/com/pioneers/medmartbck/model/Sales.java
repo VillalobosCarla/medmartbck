@@ -32,6 +32,7 @@ public class Sales {
         return id;
     } 
 
+
     public Integer getQuantity() {
         return quantity;
     }
