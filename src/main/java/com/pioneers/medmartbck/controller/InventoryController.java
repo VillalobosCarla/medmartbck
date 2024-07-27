@@ -60,4 +60,19 @@ public class InventoryController {
         return "The inventory item is deleted!";
     }
 
+    @GetMapping("/byProduct/{productBatchId}")
+    public Inventory getInventoryByProductBatchId(@PathVariable Long productBatchId) {
+        return repo.findByProductBatchId(productBatchId)
+                .orElseThrow(() -> new InventoryNotFoundException(productBatchId));
+    }
+
+    @PutMapping("/updateQuantity/{id}")
+    public Inventory updateQuantity(@PathVariable Long id, @RequestBody int quantity) {
+        return repo.findById(id)
+                .map(inventory -> {
+                    inventory.setQuantity(inventory.getQuantity() - quantity);
+                    return repo.save(inventory);
+                }).orElseThrow(() -> new InventoryNotFoundException(id));
+    }
+
 }
