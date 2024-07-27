@@ -46,7 +46,6 @@ public class SalesController {
     public Sales update(@PathVariable Long id, @RequestBody Sales newSale) {
         return repo.findById(id)
                 .map(sale -> {
-                    sale.setSalesDetailsId(newSale.getSalesDetailsId());
                     sale.setTotalAmount(newSale.getTotalAmount());
                     sale.setQuantity(newSale.getQuantity());
                     return repo.save(sale);

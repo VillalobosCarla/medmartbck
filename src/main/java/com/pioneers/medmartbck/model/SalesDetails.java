@@ -17,6 +17,10 @@ public class SalesDetails {
     private Long productId;
 
     @NotNull
+    @Column(name = "sales_id")
+    private Long salesId;
+
+    @NotNull
     @Column(name = "quantity")
     private int quantity;
 
@@ -37,6 +41,14 @@ public class SalesDetails {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public Long getSalesId() {
+        return salesId;
+    }
+
+    public void setSalesId(Long salesId) {
+        this.salesId = salesId;
     }
 
     public int getQuantity() {
