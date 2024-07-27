@@ -35,7 +35,7 @@ public class Sales {
     public Long getId() {
         return id;
     }
-    
+
     public Long getSalesDetailsId() {
         return salesDetailsId;
     }
