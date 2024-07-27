@@ -47,6 +47,7 @@ public class SalesDetailsController {
         return repo.findById(id)
                 .map(saleDetail -> {
                     saleDetail.setProductId(newSaleDetail.getProductId());
+                    saleDetail.setSalesId(newSaleDetail.getSalesId());
                     saleDetail.setQuantity(newSaleDetail.getQuantity());
                     saleDetail.setPrice(newSaleDetail.getPrice());
                     return repo.save(saleDetail);
