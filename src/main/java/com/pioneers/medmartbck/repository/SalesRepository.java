@@ -4,15 +4,13 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.pioneers.medmartbck.model.Sales;
 
-public interface SalesRepository extends JpaRepository <Sales, Long> {
+@Repository
+public interface SalesRepository extends JpaRepository<Sales, Long> {
 
-    @Query("SELECT SUM(i.quantity) FROM Sales i")
-    Long getTotalSalesCount();
-    Long countBySaleDateBetween(LocalDateTime startDate, LocalDateTime endDate);
-    
+    @Query("SELECT SUM(s.totalAmount) FROM Sales s WHERE s.saleDate BETWEEN :start AND :end")
+    Double sumBySaleDateBetween(LocalDateTime start, LocalDateTime end);
 }
-
-

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,19 +52,19 @@ public class DashboardController {
     }
 
     @GetMapping("/salesPerDay")
-    public Long getSalesPerDay(@RequestParam("date") String date) {
+    public Double getSalesPerDay(@RequestParam("date") String date) {
         LocalDateTime startOfDay = LocalDate.parse(date).atStartOfDay();
         LocalDateTime endOfDay = startOfDay.plusDays(1);
-        return salesRepo.countBySaleDateBetween(startOfDay, endOfDay);
+        return salesRepo.sumBySaleDateBetween(startOfDay, endOfDay);
     }
 
     @GetMapping("/salesPerWeek")
-    public Long getSalesPerWeek(@RequestParam("startDate") String startDate) {
+    public Double getSalesPerWeek(@RequestParam("startDate") String startDate) {
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = start.plusWeeks(1);
         LocalDateTime startOfWeek = start.atStartOfDay();
         LocalDateTime endOfWeek = end.atStartOfDay();
-        return salesRepo.countBySaleDateBetween(startOfWeek, endOfWeek);
+        return salesRepo.sumBySaleDateBetween(startOfWeek, endOfWeek);
     }
 
      @GetMapping("/productsNearExpiration")
